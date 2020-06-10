@@ -7,6 +7,7 @@ import (
 	"os"
 	"strconv"
 	"strings"
+	"time"
 )
 
 var puzzle [9][9]int
@@ -18,10 +19,16 @@ type blankCell struct {
 }
 
 func main() {
+	start := time.Now()
+
 	loadPuzzle()
 	fillInSingleCandidate()
 	solve()
 	output()
+
+	elapsed := time.Since(start)
+	log.Printf("Execution time: %s", elapsed)
+	log.Printf("Puzzle solved: %t", isSolved())
 }
 
 // Load the puzzle from an external file into a 9x9 array
